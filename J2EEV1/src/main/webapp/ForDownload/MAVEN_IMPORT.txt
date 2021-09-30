@@ -1,0 +1,95 @@
+■MAVEN
+
+	・URL:
+		(https://mvnrepository.com/)
+	
+	・Spring:
+		KeyWord(groupId):
+			org.springframework
+		Target:
+			spring-context
+			spring-core
+			spring-beans
+			spring-aop
+			spring-web
+			spring-webmvc
+				SpringMVC
+			spring-test
+				Spring-Junit
+			spring-orm
+				Spring-Hibernate
+
+	・SpringBoot
+		KeyWord(groupIdd):
+			org.springframework.boot
+		Target(artifactId):
+			spring-boot-starter-web
+
+	・AspectJ Weaver
+		Use:
+			支持切入点表达式
+			用于翻译AOP里的切面表达式
+		KeyWord(groupId)
+			org.aspectj
+		Target(artifactId):
+			aspectjweaver
+
+	・Hibernate
+		KeyWord(groupIdd):
+			org.hibernate
+		Target(artifactId):
+			Hibernate Core Relocation
+			Hibernate Validator Engine Relocation Artifact
+			Hibernate EntityManager Relocation
+
+	・Mybatis
+		KeyWord(groupId):
+			org.mybatis
+		Target(artifactId):
+			MyBatis
+
+	・Struts2
+		KeyWord(groupId):
+			org.apache.struts
+		Target(artifactId):
+			struts2-core
+			struts2-spring-plugin
+				Spring-Struts2
+
+	・Junit
+		KeyWord(groupId):
+			junit
+		Target(artifactId):
+			junit
+
+	・Servlet
+		KeyWord(groupId):
+			javax.servlet
+		Target(artifactId):
+			javax.servlet-api
+	
+	・JSTL
+		KeyWord(groupId):
+			javax.servlet.jsp.jstl
+		Target(artifactId):
+			javax.servlet.jsp.jstl-api
+	
+	・Apache Standard Taglib Implementation
+		Use：
+			使用JSTL标签库也需要导入此依赖
+		KeyWord(groupId):
+			javax.servlet.jsp.jstl
+		Target(artifactId):
+			javax.servlet.jsp.jstl-api
+
+	・c3p0
+		KeyWord(groupId)
+			com.mchange
+		Target(artifactId):
+			c3p0
+	
+	・MySQL
+		KeyWord(groupId)
+			mysql
+		Target(artifactId):
+			mysql-connector-java

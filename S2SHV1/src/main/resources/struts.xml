@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <constant name="struts.i18n.encoding" value="utf-8"></constant>
+    <constant name="struts.objectFactory" value="spring"></constant>
+    <package name="ProjectC_Struts" extends="struts-default">
+        <default-action-ref name="index"/>
+        <action name="index">
+            <result type="redirect">listProducts</result>
+        </action>
+        <action name="transactionTest" class="basicActionBean" method="transactionTest">
+            <result name="success" type="redirect">listProducts</result>
+        </action>
+        <action name="listProducts" class="basicActionBean" method="listProducts">
+            <result name="success">/JSPPages/listProducts.jsp</result>
+        </action>
+        <action name="addProduct" class="basicActionBean" method="addProduct">
+            <result name="success" type="redirect">listProducts</result>
+        </action>
+        <action name="editProduct" class="basicActionBean" method="editProduct">
+            <result name="success">/JSPPages/editProduct.jsp</result>
+        </action>
+        <action name="updateProduct" class="basicActionBean" method="updateProduct">
+            <result name="success" type="redirect">/listProducts</result>
+        </action>
+        <action name="deleteProduct" class="basicActionBean" method="deleteProduct">
+            <result name="success" type="redirect">/listProducts</result>
+        </action>
+        <action name="listCategories" class="basicActionBean" method="listCategories">
+            <result name="success">/JSPPages/listCategories.jsp</result>
+        </action>
+        <action name="addCategory" class="basicActionBean" method="addCategory">
+            <result name="success" type="redirect">listCategories</result>
+        </action>
+        <action name="editCategory" class="basicActionBean" method="editCategory">
+            <result name="success">/JSPPages/editCategory.jsp</result>
+        </action>
+        <action name="updateCategory" class="basicActionBean" method="updateCategory">
+            <result name="success" type="redirect">/listCategories</result>
+        </action>
+        <action name="deleteCategory" class="basicActionBean" method="deleteCategory">
+            <result name="success" type="redirect">/listCategories</result>
+        </action>
+    </package>
+</struts>

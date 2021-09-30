@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <constant name="struts.i18n.encoding" value="utf-8"></constant>
+    <constant name="struts.objectFactory" value="spring"></constant>
+    <package name="ProjectC_Struts" extends="struts-default">
+        <default-action-ref name="index"/>
+        <action name="index">
+            <result type="redirect">listProducts</result>
+        </action>
+        <!--
+            全部改成了注释的方式
+            要扫描Action的注释必须导入struts2-convention-plugin的依赖包
+            注意struts2-convention-plugin的版本需要跟struts2-core的版本一致
+        -->
+    </package>
+</struts>

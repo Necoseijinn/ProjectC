@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="ProjectC.Gold.Note.Inergration.S2SHV1.pojo">
+    <class name="Product" table="product_">
+        <id name="id" column="id">
+            <generator class="native"></generator>
+        </id>
+        <property name="name" column="name"></property>
+        <property name="price" column="price"></property>
+        <many-to-one name="category" column="cid" class="Category" lazy="false" not-null="false"></many-to-one>
+    </class>
+</hibernate-mapping>

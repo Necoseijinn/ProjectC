@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4"
+         xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+    <welcome-file-list>
+        <welcome-file>/JSPPages/index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!-- Servlet Part start -->
+    <!-- 用于jsp间跳转 start -->
+    <!-- To Index -->
+    <servlet>
+        <servlet-name>ToIndex</servlet-name>
+        <jsp-file>/JSPPages/index.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ToIndex</servlet-name>
+        <url-pattern>/gotoindex</url-pattern>
+    </servlet-mapping>
+
+    <!-- To Login -->
+    <servlet>
+        <servlet-name>ToLogin</servlet-name>
+        <jsp-file>/JSPPages/login.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ToLogin</servlet-name>
+        <url-pattern>/gotologin</url-pattern>
+    </servlet-mapping>
+    <!-- 用于jsp间跳转 end -->
+
+    <!-- 此servlet用于测试servlet写法 -->
+    <servlet>
+        <servlet-name>ServletTestOne</servlet-name>
+        <servlet-class>ProjectC.Gold.Note.JWeb.J2EEV1.servlet.ServletTestOne</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletTestOne</servlet-name>
+        <url-pattern>/servletone</url-pattern>
+    </servlet-mapping>
+
+    <!-- 此servlet用于测试如何获取前端传来的数据，以获取登陆信息为例 -->
+    <servlet>
+        <servlet-name>ServletLoginTest</servlet-name>
+        <servlet-class>ProjectC.Gold.Note.JWeb.J2EEV1.servlet.LoginServletTest</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletLoginTest</servlet-name>
+        <url-pattern>/servletLogin</url-pattern>
+    </servlet-mapping>
+
+    <!-- 此Servlet用于跳转html页面发来的请求到 LoginServletTest -->
+    <servlet>
+        <servlet-name>ServletLoginHTML</servlet-name>
+        <servlet-class>ProjectC.Gold.Note.JWeb.J2EEV1.servlet.LoginServletTest</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletLoginHTML</servlet-name>
+        <url-pattern>/JSPPages/servletLogin</url-pattern>
+    </servlet-mapping>
+
+    <!-- 用于演示Logout -->
+    <servlet>
+        <servlet-name>LogOut</servlet-name>
+        <servlet-class>ProjectC.Gold.Note.JWeb.J2EEV1.servlet.LogOutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogOut</servlet-name>
+        <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+
+    <!--
+        此servlet用于测试当利用超链接进行jsp之间跳转时,action路径的变化情况
+        以及此servlet配置多了一个<load-on-startup>10</load-on-startup> 10表示启动顺序
+        表明该Servlet会随着Tomcat的启动而初始化(servlet的自启动).
+    -->
+    <servlet>
+        <servlet-name>SaySomething</servlet-name>
+        <servlet-class>ProjectC.Gold.Note.JWeb.J2EEV1.servlet.SaySomethingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SaySomething</servlet-name>
+        <url-pattern>/saySomething</url-pattern>
+    </servlet-mapping>
+
+    <!-- 演示解决编码设定问题 start -->
+    <servlet>
+        <servlet-name>EncodeServlet</servlet-name>
+        <servlet-class>ProjectC.Gold.Note.JWeb.J2EEV1.servlet.EncodeProblemServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EncodeServlet</servlet-name>
+        <url-pattern>/sendInput</url-pattern>
+    </servlet-mapping>
+    <!-- filter的设置参考下方 -->
+    <!-- 演示解决编码设定问题 end -->
+
+    <!-- 演示HttpServletRequest的常见方法,获取参数以及请求头的方法. -->
+    <servlet>
+        <servlet-name>RequestMethodDemo</servlet-name>
+        <servlet-class>ProjectC.Gold.Note.JWeb.J2EEV1.servlet.TestAllRequestMethod</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RequestMethodDemo</servlet-name>
+        <url-pattern>/requstMethodDemo</url-pattern>
+    </servlet-mapping>
+
+    <!-- HttpServletResponse的常见方法,例如:设置响应内容,设置响应格式,设置响应编码,301或者302客户端跳转,设置不使用缓存等. -->
+    <servlet>
+        <servlet-name>ResponseMethodDemo</servlet-name>
+        <servlet-class>ProjectC.Gold.Note.JWeb.J2EEV1.servlet.TestAllResponseMethod</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ResponseMethodDemo</servlet-name>
+        <url-pattern>/responseMethodDemo</url-pattern>
+    </servlet-mapping>
+
+    <!-- 测试Download -->
+    <servlet>
+        <servlet-name>DownloadTest</servlet-name>
+        <servlet-class>ProjectC.Gold.Note.JWeb.J2EEV1.servlet.DownloadTest</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DownloadTest</servlet-name>
+        <url-pattern>/downloadTest</url-pattern>
+    </servlet-mapping>
+
+    <!-- 测试文件上传 -->
+    <servlet>
+        <servlet-name>FileUploadDemo</servlet-name>
+        <servlet-class>ProjectC.Gold.Note.JWeb.J2EEV1.servlet.FileUploadDemo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FileUploadDemo</servlet-name>
+        <url-pattern>/fileUploadDemo</url-pattern>
+    </servlet-mapping>
+
+    <!-- 测试增删改查 start -->
+    <!-- Product相关 -->
+    <servlet>
+        <servlet-name>ListProducts</servlet-name>
+        <servlet-class>ProjectC.Gold.Note.JWeb.J2EEV1.controller.ListProduct</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListProducts</servlet-name>
+        <url-pattern>/listProducts</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdateProduct</servlet-name>
+        <servlet-class>ProjectC.Gold.Note.JWeb.J2EEV1.controller.UpdateProduct</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateProduct</servlet-name>
+        <url-pattern>/updateProduct</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteProduct</servlet-name>
+        <servlet-class>ProjectC.Gold.Note.JWeb.J2EEV1.controller.DeleteProduct</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteProduct</servlet-name>
+        <url-pattern>/deleteProduct</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddProduct</servlet-name>
+        <servlet-class>ProjectC.Gold.Note.JWeb.J2EEV1.controller.AddProduct</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddProduct</servlet-name>
+        <url-pattern>/addProduct</url-pattern>
+    </servlet-mapping>
+
+    <!-- Category相关 -->
+    <servlet>
+        <servlet-name>ListCategories</servlet-name>
+        <servlet-class>ProjectC.Gold.Note.JWeb.J2EEV1.controller.ListCategories</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListCategories</servlet-name>
+        <url-pattern>/listCategories</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddCategory</servlet-name>
+        <servlet-class>ProjectC.Gold.Note.JWeb.J2EEV1.controller.AddCategory</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddCategory</servlet-name>
+        <url-pattern>/addCategory</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdateCategory</servlet-name>
+        <servlet-class>ProjectC.Gold.Note.JWeb.J2EEV1.controller.UpdateCategory</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateCategory</servlet-name>
+        <url-pattern>/updateCategory</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteCategory</servlet-name>
+        <servlet-class>ProjectC.Gold.Note.JWeb.J2EEV1.controller.DeleteCategory</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteCategory</servlet-name>
+        <url-pattern>/deleteCategory</url-pattern>
+    </servlet-mapping>
+    <!-- 测试增删改查 end -->
+
+    <!-- 利用JSON和Ajax实现获取和返回数据 start -->
+    <servlet>
+        <servlet-name>JSONAddCategory</servlet-name>
+        <servlet-class>ProjectC.Gold.Note.JWeb.J2EEV1.jasonAjax.GetJasonObjectFromAjax</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JSONAddCategory</servlet-name>
+        <url-pattern>/JSONAddCategory</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RequestDataServlet</servlet-name>
+        <servlet-class>ProjectC.Gold.Note.JWeb.J2EEV1.jasonAjax.RequestDataServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RequestDataServlet</servlet-name>
+        <url-pattern>/requestDataServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>JSONGetCategories</servlet-name>
+        <servlet-class>ProjectC.Gold.Note.JWeb.J2EEV1.jasonAjax.GetCategoryDataFromAjax</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JSONGetCategories</servlet-name>
+        <url-pattern>/JSONGetCategories</url-pattern>
+    </servlet-mapping>
+    <!-- 利用JSON和Ajax实现获取和返回数据 end -->
+
+    <!--
+        用于演示和说明JSP页面中的config隐式对象的使用
+        利用<jsp-file>/JSPPages/JSPDemoFile.jsp</jsp-file>让服务器直接调用 JSPDemoFile.jsp 翻译后的servlet来运行
+        <init-param>配置的键值对只在配置处的servlet的范围内有效，在servlet发生跳转后在别的servlet中就获取不到了
+    -->
+    <servlet>
+        <servlet-name>JspConfigTest</servlet-name>
+        <jsp-file>/JSPPages/JSPDemoFile.jsp</jsp-file>
+        <init-param>
+            <param-name>word</param-name>
+            <param-value>supprise</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JspConfigTest</servlet-name>
+        <url-pattern>/jspConfigTest</url-pattern>
+    </servlet-mapping>
+
+    <!-- 用于演示Cookie和Session start -->
+    <servlet>
+        <servlet-name>NoCookieSessionTest</servlet-name>
+        <servlet-class>ProjectC.Gold.Note.JWeb.J2EEV1.servlet.NoCookieSessionDemo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>NoCookieSessionTest</servlet-name>
+        <url-pattern>/noCookieSessionTest</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>WithCookieSessionTest</servlet-name>
+        <servlet-class>ProjectC.Gold.Note.JWeb.J2EEV1.servlet.WithCookieSessionDemo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>WithCookieSessionTest</servlet-name>
+        <url-pattern>/withCookieSessionTest</url-pattern>
+    </servlet-mapping>
+    <!-- 用于演示Cookie和Session end -->
+    <!-- Servlet Part end -->
+
+    <!-- Filter Part start -->
+    <!--
+        下面部分为filter过滤器，要注册进来的过滤器需要实现Filter接口
+        过滤器的执行顺序为在web.xml的部署顺序(如果是注解形式则是按照扫描顺序)
+    -->
+    <!-- 此过滤器用于给每次请求的request对象设置UTF-8编码 -->
+    <filter>
+        <filter-name>Encode</filter-name>
+        <filter-class>ProjectC.Gold.Note.JWeb.J2EEV1.filter.EncodeFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Encode</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- 此过滤器用于检查请求的用户是否已经登录过 -->
+    <filter>
+        <filter-name>loginCheck</filter-name>
+        <filter-class>ProjectC.Gold.Note.JWeb.J2EEV1.filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>loginCheck</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- Filter Part end -->
+
+    <!-- Listener Part start -->
+    <!-- 监听器的注册演示 -->
+    <listener>
+        <listener-class>ProjectC.Gold.Note.JWeb.J2EEV1.listener.ContextListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>ProjectC.Gold.Note.JWeb.J2EEV1.listener.ContextAttributeListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>ProjectC.Gold.Note.JWeb.J2EEV1.listener.SessionListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>ProjectC.Gold.Note.JWeb.J2EEV1.listener.SessionAttributeListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>ProjectC.Gold.Note.JWeb.J2EEV1.listener.RequestListener</listener-class>
+    </listener>
+    <!-- Listener Part end -->
+</web-app>
+        
