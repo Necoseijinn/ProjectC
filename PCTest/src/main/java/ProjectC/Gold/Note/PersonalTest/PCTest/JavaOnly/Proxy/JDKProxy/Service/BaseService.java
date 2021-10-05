@@ -6,6 +6,7 @@ package ProjectC.Gold.Note.PersonalTest.PCTest.JavaOnly.Proxy.JDKProxy.Service;
 public interface BaseService {
 
     public void add(String subject);
+
     public String get();
 
 }

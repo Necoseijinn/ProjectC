@@ -12,7 +12,7 @@ public class CategoryServie implements BaseService {
 
     @Override
     public void add(String subject) {
-        System.out.println("A category named "+subject+" has been added to the database");
+        System.out.println("A category named " + subject + " has been added to the database");
     }
 
     @Override

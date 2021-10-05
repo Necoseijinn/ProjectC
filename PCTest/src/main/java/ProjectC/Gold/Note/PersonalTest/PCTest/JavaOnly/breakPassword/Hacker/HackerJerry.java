@@ -12,16 +12,17 @@ public class HackerJerry {
         return targetPassword;
     }
 
-    public HackerJerry(Terminal terminal){
-        this.terminal=terminal;
-    }
-    public void setTarget(String name){
-        passwordBreaker=new PasswordBreaker(terminal,name);
+    public HackerJerry(Terminal terminal) {
+        this.terminal = terminal;
     }
 
-    public Boolean start(int len){
-        targetPassword=passwordBreaker.breakPassword(len);
-        if(targetPassword!=null){
+    public void setTarget(String name) {
+        passwordBreaker = new PasswordBreaker(terminal, name);
+    }
+
+    public Boolean start(int len) {
+        targetPassword = passwordBreaker.breakPassword(len);
+        if (targetPassword != null) {
             return true;
         }
         return false;

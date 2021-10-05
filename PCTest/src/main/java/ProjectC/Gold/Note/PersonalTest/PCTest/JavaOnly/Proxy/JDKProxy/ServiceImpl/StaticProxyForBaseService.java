@@ -26,8 +26,8 @@ public class StaticProxyForBaseService implements BaseService {
      *
      * @param baseService
      */
-    public StaticProxyForBaseService(BaseService baseService){
-        this.baseService=baseService;
+    public StaticProxyForBaseService(BaseService baseService) {
+        this.baseService = baseService;
     }
 
     @Override

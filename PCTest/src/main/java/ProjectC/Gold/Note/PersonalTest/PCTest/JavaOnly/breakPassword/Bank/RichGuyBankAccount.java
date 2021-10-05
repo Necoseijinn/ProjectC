@@ -21,18 +21,18 @@ public class RichGuyBankAccount {
         this.accountPassword = accountPassword;
     }
 
-    public RichGuyBankAccount(String userName, String userPassword){
-        this.accountName=userName;
-        this.accountPassword=userPassword;
+    public RichGuyBankAccount(String userName, String userPassword) {
+        this.accountName = userName;
+        this.accountPassword = userPassword;
     }
 
-    public double addBalance(double money){
+    public double addBalance(double money) {
         this.balance += money;
         return this.balance;
     }
 
-    public double getMoney(double money){
-        this.balance-=money;
+    public double getMoney(double money) {
+        this.balance -= money;
         return money;
     }
 

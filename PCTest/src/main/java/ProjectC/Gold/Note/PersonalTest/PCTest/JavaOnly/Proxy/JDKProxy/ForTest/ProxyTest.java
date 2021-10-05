@@ -38,6 +38,17 @@ public class ProxyTest {
         /** 代理对象调用add方法，会进行亲后处理以及调用被代理类的add方法 **/
         proxy.add("Nokia1100");
 
+        /** 生成JDK动态做成的代理对象类文件 **/
+        //saveGeneratedJDKProxyFiles();
+    }
+
+    /***
+     *
+     * 生成JDK动态做成的代理对象类文件
+     *
+     */
+    private static void saveGeneratedJDKProxyFiles() {
+
         /***
          *
          * 重头戏
@@ -45,7 +56,7 @@ public class ProxyTest {
          * 需要传入被代理对象类的名字以及被代理对象类所实现的接口
          *
          */
-        byte[] bytes = ProxyGenerator.generateProxyClass(productService.getClass().getName(), productService.getClass().getInterfaces());
+        byte[] bytes = ProxyGenerator.generateProxyClass(ProductService.class.getName(), ProductService.class.getInterfaces());
 
         /***
          *
@@ -65,15 +76,13 @@ public class ProxyTest {
             fileOutputStream.flush();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 fileOutputStream.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-
-
 
     }
 }

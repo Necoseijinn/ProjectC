@@ -16,13 +16,13 @@ public class TimeLine {
         kuke.openAccount(terminal);
         kuke.saveMoney(1000000000);
         HackerJerry jerry = new HackerJerry(terminal);
-        long l1=System.currentTimeMillis();
+        long l1 = System.currentTimeMillis();
         jerry.setTarget("kuke");
         jerry.start(5);
-        long l2=System.currentTimeMillis();
-        System.out.println("kuke的密码 "+kuke.getBankPassword());
-        System.out.println("破解的密码 "+jerry.getTargetPassword());
-        System.out.println("用时: "+(l2-l1)/1000+"秒");
+        long l2 = System.currentTimeMillis();
+        System.out.println("kuke的密码 " + kuke.getBankPassword());
+        System.out.println("破解的密码 " + jerry.getTargetPassword());
+        System.out.println("用时: " + (l2 - l1) / 1000 + "秒");
 
     }
 }

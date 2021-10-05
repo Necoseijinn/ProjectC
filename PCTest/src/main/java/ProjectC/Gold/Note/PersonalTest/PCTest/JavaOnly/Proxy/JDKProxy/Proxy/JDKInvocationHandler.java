@@ -3,6 +3,7 @@ package ProjectC.Gold.Note.PersonalTest.PCTest.JavaOnly.Proxy.JDKProxy.Proxy;
 import jdk.nashorn.internal.scripts.JD;
 
 import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
@@ -19,12 +20,16 @@ import java.lang.reflect.Proxy;
  */
 public class JDKInvocationHandler<T> implements InvocationHandler {
 
-    /** 被代理对象 **/
+    /**
+     * 被代理对象
+     **/
     private T t;
 
-    /** 利用构造函数传入被代理对象 **/
-    public JDKInvocationHandler(T t){
-        this.t =t;
+    /**
+     * 利用构造函数传入被代理对象
+     **/
+    public JDKInvocationHandler(T t) {
+        this.t = t;
     }
 
     /***
@@ -38,7 +43,7 @@ public class JDKInvocationHandler<T> implements InvocationHandler {
      * @param claz
      * @return
      */
-    public Object getProxy(Class claz){
+    public Object getProxy(Class claz) {
 
         /***
          *
@@ -71,12 +76,48 @@ public class JDKInvocationHandler<T> implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
-        System.out.println("=========Get database connection=========");
+        /** 返回的对象（目标方法处理结果） **/
+        Object obj = null;
 
-        /** 执行被代理类的方法 **/
-        Object obj = method.invoke(t,args);
+        try {
 
-        System.out.println("=========Close database connection=========");
+            /** 前置方法 **/
+            before(t, method);
+
+            /** 执行被代理类的方法 **/
+            obj = method.invoke(t, args);
+
+            /** 返回方法 **/
+            afterReturn(t, method);
+
+        } catch (Throwable throwable) {
+
+            /** 异常处理方法 **/
+            afterThrowing(t, method);
+
+        } finally {
+
+            /** 后置方法 **/
+            after(t, method);
+
+        }
+
         return obj;
+    }
+
+    private void afterReturn(Object obj, Method method) {
+        System.out.println("[" + obj.getClass().getSimpleName() + "的" + method.getName() + "方法的返回处理方法]");
+    }
+
+    private void afterThrowing(Object obj, Method method) {
+        System.out.println("[" + obj.getClass().getSimpleName() + "的" + method.getName() + "方法的异常处理方法]");
+    }
+
+    private void after(Object obj, Method method) {
+        System.out.println("[" + obj.getClass().getSimpleName() + "的" + method.getName() + "方法的后置处理方法]");
+    }
+
+    private void before(Object obj, Method method) {
+        System.out.println("[" + obj.getClass().getSimpleName() + "的" + method.getName() + "方法的前置处理方法]");
     }
 }

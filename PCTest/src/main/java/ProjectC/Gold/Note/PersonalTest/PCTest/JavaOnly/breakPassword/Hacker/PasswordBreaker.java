@@ -9,45 +9,45 @@ public class PasswordBreaker {
     private String username;
     private String password;
     private byte[] bytes;
-    private Boolean breakResult=false;
-    private int currentLevel=0;
-    private int length=0;
+    private Boolean breakResult = false;
+    private int currentLevel = 0;
+    private int length = 0;
 
-    public PasswordBreaker(Terminal terminal,String username){
-        this.terminal=terminal;
-        this.username=username;
+    public PasswordBreaker(Terminal terminal, String username) {
+        this.terminal = terminal;
+        this.username = username;
     }
 
-    public String breakPassword(int len){
-        this.length=len;
-        this.currentLevel=0;
-        bytes=new byte[len];
+    public String breakPassword(int len) {
+        this.length = len;
+        this.currentLevel = 0;
+        bytes = new byte[len];
         breakDown();
         return password;
     }
 
-    private void breakDown(){
-        if (breakResult){
+    private void breakDown() {
+        if (breakResult) {
             return;
         }
-        if(currentLevel<length){
-            for(int i=33;i<123;i++){
-                bytes[currentLevel]=(byte) i;
-                if (currentLevel<length){
+        if (currentLevel < length) {
+            for (int i = 33; i < 123; i++) {
+                bytes[currentLevel] = (byte) i;
+                if (currentLevel < length) {
                     currentLevel++;
                     breakDown();
                 }
-                if (breakResult){
+                if (breakResult) {
                     return;
                 }
             }
             currentLevel--;
-        }else{
-            password=new String(bytes);
-            if(terminal.varifyPassword(username,password)){
-                breakResult=true;
+        } else {
+            password = new String(bytes);
+            if (terminal.varifyPassword(username, password)) {
+                breakResult = true;
                 currentLevel--;
-            }else{
+            } else {
                 currentLevel--;
             }
         }

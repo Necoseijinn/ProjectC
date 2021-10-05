@@ -32,8 +32,6 @@
             <artifactId>cglib</artifactId>
             <version>3.3.0</version>
         </dependency>
-
-
     </dependencies>
 
     <build>
@@ -51,6 +49,10 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <target>1.8</target>
+                        <source>1.8</source>
+                    </configuration>
                     <version>3.8.0</version>
                 </plugin>
                 <plugin>

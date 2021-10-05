@@ -13,7 +13,7 @@ public class RichGuy {
 
     public RichGuy(String name) {
         this.name = name;
-        this.bankPassword=PasswordGenerator.generatePassword();
+        this.bankPassword = PasswordGenerator.generatePassword();
     }
 
 
@@ -22,12 +22,12 @@ public class RichGuy {
     }
 
     public void openAccount(Terminal terminal) {
-        this.terminal=terminal;
-        terminal.openAccount(name,bankPassword);
+        this.terminal = terminal;
+        terminal.openAccount(name, bankPassword);
     }
 
-    public boolean saveMoney(double money){
-        if(!terminal.varifyPassword(name,bankPassword)){
+    public boolean saveMoney(double money) {
+        if (!terminal.varifyPassword(name, bankPassword)) {
             return false;
         }
         terminal.addBalance(money);

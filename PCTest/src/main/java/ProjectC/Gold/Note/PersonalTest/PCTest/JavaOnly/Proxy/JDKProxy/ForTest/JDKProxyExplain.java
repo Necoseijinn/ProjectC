@@ -23,7 +23,7 @@ public class JDKProxyExplain {
         System.out.println("===============================================");
 
         /** 获取父类或者接口的add方法 **/
-        Method baseServiceAdd=null;
+        Method baseServiceAdd = null;
         try {
             baseServiceAdd = BaseService.class.getMethod("add", String.class);
         } catch (NoSuchMethodException e) {
@@ -31,18 +31,18 @@ public class JDKProxyExplain {
         }
 
         /** 获取子类或者实现类的add方法 **/
-        Method productServiceAdd=null;
+        Method productServiceAdd = null;
         try {
             productServiceAdd = ProductService.class.getMethod("add", String.class);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
 
-        System.out.println("BaseService add method is equals to ProductService add method? "+(baseServiceAdd==productServiceAdd));
+        System.out.println("BaseService add method is equals to ProductService add method? " + (baseServiceAdd == productServiceAdd));
         System.out.println("===============================================");
-        System.out.println("baseServiceAdd : "+baseServiceAdd);
+        System.out.println("baseServiceAdd : " + baseServiceAdd);
         System.out.println("===============================================");
-        System.out.println("productServiceAdd : "+productServiceAdd);
+        System.out.println("productServiceAdd : " + productServiceAdd);
         System.out.println("===============================================");
 
         try {
