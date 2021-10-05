@@ -1,11 +1,17 @@
 package ProjectC.Gold.Note.SpringIOCV1.pojo;
 
+import java.util.Date;
 import java.util.List;
 
 public class Category {
     private int id;
     private String name;
     private List<Product> productList;
+
+    public Category() {
+        super();
+        System.out.println(new Date().toString()+" 【Category】的无参构造器被调用，【Category】的实例被创建了。");
+    }
 
     public int getId() {
         return id;

@@ -5,39 +5,4 @@
 						http://www.springframework.org/schema/beans
 						http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!--
-        一个Bean标签可以注册一个组件（对象、类）
-        class：写要注册的组件的全类名
-        id：这个对象的唯一标示
-    -->
-    <bean id="product" class="ProjectC.Gold.Note.SpringIOCV1.pojo.Product">
-
-        <!--
-            使用property标签为Product对象的属性赋值
-            name="xxx"：指定属性名
-            value="xx"：为这个属性赋值
-            只要是基本数据类型都可以直接写值，spring会做转换。
-            如果不是基本数据类型的情况（比如说类对象），需要在property标签中进一步配置。
-            换句话说，只要是复杂类型都需要在property标签中进一步配置。
-        -->
-        <property name="id" value="1"/>
-        <property name="name" value="Nokia970"/>
-        <property name="price" value="2999"/>
-
-        <!--
-            复杂类型之类对象
-        -->
-        <property name="category">
-            <bean id="category" class="ProjectC.Gold.Note.SpringIOCV1.pojo.Category">
-                <property name="id" value="1"/>
-                <property name="name" value="Nokia Line"/>
-                <property name="productList">
-                    <list>
-                        <ref bean="product"/>
-                    </list>
-                </property>
-            </bean>
-        </property>
-    </bean>
-
 </beans>
