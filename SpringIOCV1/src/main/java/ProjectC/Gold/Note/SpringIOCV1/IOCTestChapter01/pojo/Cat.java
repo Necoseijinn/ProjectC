@@ -1,4 +1,4 @@
-package ProjectC.Gold.Note.SpringIOCV1.pojo;
+package ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter01.pojo;
 
 import java.util.Date;
 
@@ -17,9 +17,9 @@ public class Cat {
     }
 
     /**不设置Cat类的name的setter方法，Spring就无法赋值。
-    public void setName(String name) {
-        this.name = name;
-    }**/
+     public void setName(String name) {
+     this.name = name;
+     }**/
 
     public String getKind() {
         return kind;

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!-- test01 start -->
+    <!--
+        需求：
+            测试使用null值，引用类型赋值（引用其他bean、引用内部bean）集合类型赋值（List、Map、Properties）
+            util名称空间创建集合类型的bean级联属性赋值
+        只要是基本数据类型都可以直接写值，spring会做转换。
+        如果不是基本数据类型的情况（比如说类对象），需要在property标签中进一步配置。
+        换句话说，只要是复杂类型都需要在property标签中进一步配置。
+    -->
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter02.pojo.Product" id="product1">
+        <property name="id" value="1"/>
+        <!-- null赋值方法 -->
+        <property name="name">
+            <null/>
+        </property>
+        <!-- 引用外部bean -->
+        <!-- <property name="category" ref="category1"/> -->
+        <!-- 引用内部bean（不能被获取到，只能内部使用） -->
+        <property name="category">
+            <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter02.pojo.Category">
+                <property name="id" value="1"/>
+                <property name="name" value="Nokia Line"/>
+                <!-- 集合类型赋值 List -->
+                <property name="productList">
+                    <list>
+                        <!-- 内部bean -->
+                        <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter02.pojo.Product" p:id="2" p:name="NokiaGO"/>
+                        <!-- 引用外部bean -->
+                        <ref bean="product2"/>
+                    </list>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter02.pojo.CarBook" id="carBook1">
+        <!-- 集合类型赋值 Map -->
+        <property name="book">
+            <map>
+                <entry>
+                    <!-- key需要再创建一个子标签<value>来设置key的值 -->
+                    <key>
+                        <!--
+                            value标签可以通过设置type属性来设置类型（基本数据类型）
+                            如果为复杂类型可以使用 ref 或者 bean 子标签来设置
+                        -->
+                        <value type="java.lang.String">宝马1</value>
+                    </key>
+                    <value type="java.lang.String">型号1</value>
+                </entry>
+                <entry key="宝马2" value="型号2"/>
+                <entry key="宝马3">
+                    <value type="java.lang.String">型号3</value>
+                </entry>
+                <entry key-ref="string1" value-ref="string2"/>
+                <!--
+                    如果想要配置bean的形式配置key和value参考以下的情况
+                -->
+                <entry>
+                    <key>
+                        <bean class="java.lang.String">
+                            <constructor-arg name="value" value="宝马5"/>
+                        </bean>
+                    </key>
+                    <bean class="java.lang.String">
+                        <constructor-arg name="value" value="型号5"/>
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter02.pojo.PhoneBook" id="phoneBook1">
+        <!-- 引用util名称空间创建的集合 -->
+        <property name="properties" ref="properties1"/>
+    </bean>
+
+    <!--
+        使用util名称空间创建集合
+        创建的方法跟在bean中配置的方法一样
+        此处为 properties 的创建（key和value都是字符串）
+        需要添加以下的语句到上面
+            xmlns:util="http://www.springframework.org/schema/util"
+            以及
+            xsi:schemaLocation="...
+            http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util.xsd
+            ..."
+       没在xsi:schemaLocation添加相应内容会报错
+    -->
+    <util:properties id="properties1" local-override="true">
+        <prop key="苹果">苹果7</prop>
+        <prop key="诺基亚">Nokia990</prop>
+    </util:properties>
+
+    <!--
+        级联属性赋值
+        级联属性:属性的属性
+    -->
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter02.pojo.Product" id="product2">
+        <property name="category" ref="category1"/>
+        <!-- 给Product中category属性的name属性赋值 -->
+        <property name="category.name" value="Nokia Line"/>
+    </bean>
+
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter02.pojo.Category" id="category1"/>
+
+    <bean class="java.lang.String" id="string1">
+        <constructor-arg name="value" value="宝马4"/>
+    </bean>
+    <bean class="java.lang.String" id="string2">
+        <constructor-arg name="value" value="型号4"/>
+    </bean>
+    <!-- test01 end -->
+
+    <!-- test02 start -->
+    <!--
+        bean之间的依赖
+        此处用到了 depends-on="cooker1" 的设置
+        只是告诉Spring要创造这个bean对象之前必须创造id为 cooker1 的bean对象
+    -->
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter02.pojo.Dinner" id="dinner1" depends-on="cooker1">
+        <property name="cooker" ref="cooker1"/>
+        <property name="dinnerName" value="烤鱼"/>
+    </bean>
+    <!--
+        abstract="true"：这个bean的配置是一个抽象的，不能获取他的实例，只能被别人用来继承
+        此类型用于提取重复配置，只需让别的bean继承这个bean就能获取相应配置
+    -->
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter02.pojo.Cooker" id="cookerParent" abstract="true">
+        <property name="specialty" value="川菜"/>
+    </bean>
+    <!--
+        此处用到了 parent="cookerParent" 的设置
+        用于告诉Spring这个bean继承了id为 cookerParent 的pean配置
+        相当于得到了
+        <property name="specialty" value="川菜"/>
+        的配置
+    -->
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter02.pojo.Cooker" id="cooker1" parent="cookerParent">
+        <property name="name" value="王刚"/>
+    </bean>
+    <!-- test02 end -->
+
+    <!-- test03 start -->
+    <!--
+        bean的创建默认就是框架利用反射new出来的bean实例
+
+        工厂模式：工厂帮我们创建对象
+        当一个对象需要很复杂的创建过程的时候，手动去创建这个对象就很麻烦。
+        这时候就需要一个工厂类来帮我们完成创建对象的工作。
+
+        静态工厂：工厂本身不用创建对象；通过静态方法调用，对象 = 工厂类.工厂方法名()；
+        实例工厂：工厂本身需要创建对象；
+            工厂类 工厂对象 = new 工厂类();
+			工厂对象.getAirPlane("张三");
+
+	    现在有这样一种情况，我们需要让IOC容器管理的对象是由一个工厂创建的。
+	    而手动去配置这个对象的bean又太麻烦。
+	    所以我们需要配置一个工厂到IOC容器中，等我们想要获取目标对象时让IOC容器调用工厂的方法创建bean对象并返回给我们。
+    -->
+    <!--
+        静态工厂(不需要创建工厂本身)
+        class：指定静态工厂全类名
+        factory-method:指定工厂方法
+        constructor-arg：可以为方法传参
+    -->
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter02.pojo.PhoneStaticFactory" id="product1190" factory-method="getProduct">
+        <constructor-arg name="version" value="1190"/>
+    </bean>
+    <!--
+        实例工厂(需要创建工厂本身)
+        只需要设置class即可
+    -->
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter02.pojo.PhoneInstanceFactory" id="phoneInstanceFactory"/>
+    <!--
+        配置由实例工厂生成的bean对象
+        factory-bean:指定实例工厂
+        factory-method::指定工厂方法
+        constructor-arg：可以为方法传参
+    -->
+    <bean id="product2590" class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter02.pojo.Product" factory-bean="phoneInstanceFactory" factory-method="getProduct">
+        <!-- 传给实例工厂方法的参数 -->
+        <constructor-arg name="version" value="2590"/>
+    </bean>
+    <!--
+        FactoryBean(Spring规定的一个接口)
+        单从字面上理解就是Factory的Bean也就是工厂的Bean
+        特点
+            1，ioc容器启动的时候不会创建实例
+		    2，FactoryBean；获取的时候的才创建对象
+		有3个核心方法
+			1，getObject()
+				返回工厂生成的实例
+			2，getObjectType()
+				返回工厂生成的实例的类
+			3，isSingleton()
+				返回工厂是否以单例模式生产实例
+    -->
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter02.pojo.FactoryBeanForPhone" id="product3990"/>
+    <!-- test04 end -->
+
+</beans>

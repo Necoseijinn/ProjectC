@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!-- test01 start -->
     <!--
         一个Bean标签可以注册一个组件（对象、类）
         class：写要注册的组件的全类名
         id：这个对象的唯一标示
-        bean默认是单例的，可以通过设置 scope="prototype" 来设置该bean为非单例（scope对应的singleton为单例，不写默认也是singleton）
+        bean默认是单例的，可以通过设置 scope="prototype" 来设置该bean为非单例
+        关于scope---作用域
+            bean的作用域:指定bean是否单实例，xxx；默认：单实例的
+
+            prototype:多实例的；
+                1）、容器启动默认不会去创建多实例bean
+                2）、获取的时候创建这个bean
+                3）、每次获取都会创建一个新的对象
+
+            singleton:单实例的；默认的；
+                1）、在容器启动完成之前就已经创建好对象，保存在容器中了。
+                2）、任何获取都是获取之前创建好的那个对象；
+
+            request:在web环境下，同一次请求创建一个Bean实例（没用）
+	        session:在web环境下，同一次会话创建一个Bean实例（没用）
     -->
-    <bean id="product" class="ProjectC.Gold.Note.SpringIOCV1.pojo.Product" scope="prototype">
+    <bean id="product" class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter01.pojo.Product" scope="prototype">
 
         <!--
             使用property标签为Product对象的属性赋值
@@ -18,26 +34,65 @@
             只要是基本数据类型都可以直接写值，spring会做转换。
             如果不是基本数据类型的情况（比如说类对象），需要在property标签中进一步配置。
             换句话说，只要是复杂类型都需要在property标签中进一步配置。
-            复杂类型配置请参考 ProjectC.Gold.Note.SpringIOCV1.IOCTest.IOCTestChapter02
+            复杂类型配置请参考 ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter02.IOCTest.IOCTestChapter02
         -->
         <property name="id" value="1"/>
         <property name="name" value="Nokia970"/>
         <property name="price" value="2999"/>
 
     </bean>
-
-    <bean id="category" class="ProjectC.Gold.Note.SpringIOCV1.pojo.Category">
+    <!--
+        没有设置 scope 属性，所以默认为单例。
+    -->
+    <bean id="category" class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter01.pojo.Category">
         <property name="id" value="2"/>
         <property name="name" value="Apple Line"/>
     </bean>
+    <!-- test01 end -->
 
-    <bean id="cat" class="ProjectC.Gold.Note.SpringIOCV1.pojo.Cat" scope="prototype">
-        <property name="kind" value="短腿"/>
+    <!-- test03 start -->
+    <!--
+        测试Spring给属性赋值的原理
+        不是检测是否存在该属性而是检测是否存在该属性的setter方法。
+    -->
+    <bean id="cat" class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter01.pojo.Cat" scope="prototype">
+        <property name="kind" value="美短"/>
         <property name="age" value="1"/>
         <!--
             由于没有给name属性设置setter方法所以会报错
         -->
-        <property name="name" value="饭饭"/>
+        <property name="name" value="凉皮"/>
     </bean>
+    <!-- test03 end -->
+
+    <!-- test04 start -->
+    <!--
+        这两个bean类相同但id不同，这种情况是允许的。
+        此处用到了bean的p命名空间，使用该命名空间的前提是必须有对应的setter方法。
+        需要添加以下的语句到上面
+            xmlns:p="http://www.springframework.org/schema/p"
+        无需添加内容到xsi:schemaLocation中
+        特定的名称空间并不需要定义在一个XSD文件中，它只在Spring内核中存在。
+    -->
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter01.pojo.Bird" id="bird1" p:age="1" p:kind="麻雀"/>
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter01.pojo.Bird" id="bird2" p:age="2" p:kind="大雁"/>
+    <!-- test04 end -->
+
+    <!-- test05 start -->
+    <!--
+        调用有参构造器进行创建对象并赋值
+        目标有参构造器为：
+            public Dog(String kind, String name, int age)
+        <constructor-arg>标签的书写顺序对应目标有参构造器的顺序（从左到右）
+        如果<constructor-arg>标签的书写顺序乱了
+           1，可以通过设置 index 属性来告诉Spring参数的顺序。
+           2，可以通过设置 name 属性告诉Spring参数的名称来确认使用哪个构造器以及参数顺序。
+    -->
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter01.pojo.Dog" id="dog">
+        <constructor-arg name="kind" value="边牧"/>
+        <constructor-arg name="age" value="3"/>
+        <constructor-arg name="name" value="天天"/>
+    </bean>
+    <!-- test05 end -->
 
 </beans>

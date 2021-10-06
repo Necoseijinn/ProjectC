@@ -1,17 +1,10 @@
-package ProjectC.Gold.Note.SpringIOCV1.pojo;
-
-import java.util.Date;
+package ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter02.pojo;
 
 public class Product {
     private int id;
     private String name;
     private float price;
     private Category category;
-
-    public Product(){
-        super();
-        System.out.println(new Date().toString()+" 【Product】的无参构造器被调用，【Product】的实例被创建了。");
-    }
 
     public int getId() {
         return id;
