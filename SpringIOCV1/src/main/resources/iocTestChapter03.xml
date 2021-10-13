@@ -3,4 +3,17 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!--
+        test01 start
+    -->
+    <!--
+        在配置bean的同时可以指定配置的bean的Class中的某一方法来作为初始化或者销毁方法
+        注意不能指定带有参数的方法
+    -->
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter03.pojo.Worker" id="worker"
+          init-method="workerInitMethod"
+          destroy-method="workerDestroyMethod"/>
+    <!--
+        test01 end
+    -->
 </beans>

@@ -4,7 +4,9 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!-- test01 start -->
+    <!--
+        test01 start
+    -->
     <!--
         一个Bean标签可以注册一个组件（对象、类）
         class：写要注册的组件的全类名
@@ -48,9 +50,13 @@
         <property name="id" value="2"/>
         <property name="name" value="Apple Line"/>
     </bean>
-    <!-- test01 end -->
+    <!--
+        test01 end
+    -->
 
-    <!-- test03 start -->
+    <!--
+        test03 start
+    -->
     <!--
         测试Spring给属性赋值的原理
         不是检测是否存在该属性而是检测是否存在该属性的setter方法。
@@ -63,9 +69,13 @@
         -->
         <property name="name" value="凉皮"/>
     </bean>
-    <!-- test03 end -->
+    <!--
+        test03 end
+    -->
 
-    <!-- test04 start -->
+    <!--
+        test04 start
+    -->
     <!--
         这两个bean类相同但id不同，这种情况是允许的。
         此处用到了bean的p命名空间，使用该命名空间的前提是必须有对应的setter方法。
@@ -76,9 +86,13 @@
     -->
     <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter01.pojo.Bird" id="bird1" p:age="1" p:kind="麻雀"/>
     <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter01.pojo.Bird" id="bird2" p:age="2" p:kind="大雁"/>
-    <!-- test04 end -->
+    <!--
+        test04 end
+    -->
 
-    <!-- test05 start -->
+    <!--
+        test05 start
+    -->
     <!--
         调用有参构造器进行创建对象并赋值
         目标有参构造器为：
@@ -93,6 +107,8 @@
         <constructor-arg name="age" value="3"/>
         <constructor-arg name="name" value="天天"/>
     </bean>
-    <!-- test05 end -->
+    <!--
+        test05 end
+    -->
 
 </beans>
