@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+">
 
     <!--
         test01 start
@@ -10,10 +13,124 @@
         在配置bean的同时可以指定配置的bean的Class中的某一方法来作为初始化或者销毁方法
         注意不能指定带有参数的方法
     -->
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter03.pojo.Boss"
+          init-method="bossInitMethod"
+          destroy-method="bossDestroyMethod"/>
     <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter03.pojo.Worker" id="worker"
           init-method="workerInitMethod"
-          destroy-method="workerDestroyMethod"/>
+          destroy-method="workerDestroyMethod"
+          scope="prototype"/>
     <!--
         test01 end
     -->
+
+    <!--
+        test02 start
+    -->
+    <!--
+        想要注册自定义的BeanPostProcessor
+        只需要创建一个实现了BeanPostProcessor的类
+        并把该类以bean的形式配置好即可
+        容器会在启动的时候识别该bean并注册成为BeanPostProcessor
+    -->
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter03.PostProcessor.MyBeanPostProcessor"/>
+    <!--
+        test02 end
+    -->
+
+    <!--
+        test03 start
+    -->
+    <!--
+        1，不使用外部属性文件的情况
+    -->
+    <bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource1">
+        <property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/plain?characterEncoding=UTF-8&amp;serverTimezone=UTC"/>
+        <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="user" value="root"/>
+        <property name="password" value="admin"/>
+    </bean>
+    <!--
+        2，使用外部属性文件的情况
+        此处要很小心
+        之所以在外部属性的key的部分使用 xxx.xxx 的形式来当key
+        是因为有些变量是Spring作为保留所用的（关键字）
+        比如${username}
+        如果properties文件中用username来当key就会引发冲突
+        所以最好加个前缀
+        比如此处用 jdbc.xxx 的形式来作为key
+    -->
+    <context:property-placeholder location="classpath:jdbcConfig.properties"/>
+    <bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource2">
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+    <!--
+        下面的bean用于演示Spring自带的${username}是什么值
+        结果：系统用户名
+    -->
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter03.pojo.UserName">
+        <property name="name" value="${username}"/>
+    </bean>
+    <!--
+        test03 end
+    -->
+
+    <!--
+        test04 start
+    -->
+    <!--
+        首先配置好用于自动装配的bean
+    -->
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter03.pojo.Phone" id="phone">
+        <property name="name" value="华为"/>
+    </bean>
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter03.pojo.Car" id="car">
+        <property name="name" value="蝙蝠车"/>
+        <property name="color" value="黑色"/>
+    </bean>
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter03.pojo.Book" id="book01">
+        <property name="bookName" value="西游记"/>
+    </bean>
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter03.pojo.Book" id="book02">
+        <property name="bookName" value="三国演义"/>
+    </bean>
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter03.pojo.Book" id="book03">
+        <property name="bookName" value="水浒传"/>
+    </bean>
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter03.pojo.Book" id="book04">
+        <property name="bookName" value="红楼梦"/>
+    </bean>
+    <!--
+        接下来配置使用自动装配的bean
+        注意自动装配也分种类
+        假设有一个属性需要自动装配
+            private Car car;
+            有以下几种自动装配方法：
+            1，autowire="byName" ===> 按照名字
+                以属性名(car)作为id去容器中找到这个bean并赋值
+                如果找不到就装配null。
+            2，autowire="byType" ===> 按照类型
+                以属性的类型作为查找依据去容器中找到这个bean并赋值
+                如果容器中有多个这葛类型的组件就报错（NoUniqueBeanDefinitionException）。
+            3，autowire="byType" ===> 按照构造器
+                先按照有参构造器参数的类型进行装配（成功就赋值），没有就直接为组件装配null即可。
+                如果按照类型找到了多个参数的名作为id继续匹配，找到就装配，找不到就null。
+                （不会报错）
+    -->
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter03.pojo.Person" id="person01" autowire="byType">
+        <property name="name" value="张三"/>
+    </bean>
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter03.pojo.Person" id="person02" autowire="byName">
+        <property name="name" value="李四"/>
+    </bean>
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter03.pojo.Person" id="person03" autowire="constructor">
+        <property name="name" value="王五"/>
+    </bean>
+    <!--
+        test04 end
+    -->
+
 </beans>

@@ -2,21 +2,21 @@ package ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter03.pojo;
 
 import java.util.Date;
 
-public class Worker {
+public class Boss {
 
     private String name;
     private int age;
 
-    public Worker() {
-        System.out.println(new Date().toString()+" [Worker]的构造函数被调用了");
+    public Boss() {
+        System.out.println(new Date().toString()+" [Boss]的构造函数被调用了");
     }
 
-    public void workerInitMethod(){
-        System.out.println(new Date().toString()+" [Worker]的初始化函数被调用了");
+    public void bossInitMethod(){
+        System.out.println(new Date().toString()+" [Boss]的初始化函数被调用了");
     }
 
-    public void workerDestroyMethod(){
-        System.out.println(new Date().toString()+" [Worker]的销毁函数被调用了");
+    public void bossDestroyMethod(){
+        System.out.println(new Date().toString()+" [Boss]的销毁函数被调用了");
     }
 
     public String getName() {
@@ -37,7 +37,7 @@ public class Worker {
 
     @Override
     public String toString() {
-        return "Worker{" +
+        return "Boss{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
                 '}';
