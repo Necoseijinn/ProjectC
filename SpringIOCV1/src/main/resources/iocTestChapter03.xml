@@ -133,4 +133,33 @@
         test04 end
     -->
 
+    <!--
+        test05 start
+    -->
+    <!--
+        SpEL的演示
+            SpEL的格式：#{xxx}
+            SpEL的主要功能：
+                1，使用字面量
+                2，引用其他bean
+                3，引用其他bean的某个属性值
+                4，调用非静态方法以及调用静态方法
+                5，使用运算符
+    -->
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter03.pojo.Person" id="person04">
+        <!-- 引用其他bean的某个属性值 -->
+        <property name="name" value="#{person01.name}哥哥"/>
+        <!-- 使用字面量&使用运算符 -->
+        <property name="salary" value="#{1234*12.34}"/>
+        <!-- 引用其他bean -->
+        <property name="car" value="#{car}"/>
+        <!-- 调用静态方法 -->
+        <property name="email" value="#{T(java.util.UUID).randomUUID().toString().substring(0,5)}"/>
+        <!-- 调用非静态方法 -->
+        <property name="favoriteBook" value="#{book01.getBookName()}"/>
+    </bean>
+    <!--
+        test05 end
+    -->
+
 </beans>

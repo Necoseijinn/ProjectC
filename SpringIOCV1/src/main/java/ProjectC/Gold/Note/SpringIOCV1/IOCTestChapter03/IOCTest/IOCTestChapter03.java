@@ -67,12 +67,12 @@ import java.util.Date;
  * test05
  * 需求：
  *      演示 SpEL ===>　Spring Expression Language　Spring表达式语言
- *      SpEL使用字面量、
- * 		    引用其他bean、
- * 		    引用其他bean的某个属性值、
- * 		   【 调用非静态方法
- * 		    调用静态方法、】
- * 		    使用运算符；都支持
+ *      SpEL的主要功能：
+ *          1，使用字面量
+ *          2，引用其他bean
+ * 		    3，引用其他bean的某个属性值
+ * 		    4，调用非静态方法以及调用静态方法
+ * 		    5，使用运算符
  *
  */
 public class IOCTestChapter03 {
@@ -114,6 +114,7 @@ public class IOCTestChapter03 {
     public void test03() throws SQLException {
 
         applicationContext = new ClassPathXmlApplicationContext("iocTestChapter03.xml");
+        System.out.println(new Date().toString()+" 容器初始化完成");
 
         DataSource dataSource1 = (DataSource) applicationContext.getBean("dataSource1");
         System.out.println(dataSource1.getConnection());
@@ -133,12 +134,21 @@ public class IOCTestChapter03 {
     public void test04(){
 
         applicationContext = new ClassPathXmlApplicationContext("iocTestChapter03.xml");
+        System.out.println(new Date().toString()+" 容器初始化完成");
         Person person01 = (Person) applicationContext.getBean("person01");
         System.out.println(new Date().toString()+" Person01 : "+person01);
         Person person02 = (Person) applicationContext.getBean("person02");
         System.out.println(new Date().toString()+" Person02 : "+person02);
         Person person03 = (Person) applicationContext.getBean("person03");
         System.out.println(new Date().toString()+" Person03 : "+person03);
+    }
+
+    @Test
+    public void test05(){
+        applicationContext=new ClassPathXmlApplicationContext("iocTestChapter03.xml");
+        System.out.println(new Date().toString()+" 容器初始化完成");
+        Person person04 = (Person)applicationContext.getBean("person04");
+        System.out.println(new Date().toString()+" 使用SpEL装配的Person04 : "+person04);
     }
 
 }

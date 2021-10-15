@@ -7,6 +7,9 @@ public class Person {
     private Phone phone;
     private Car car;
     private List<Book> books;
+    private double salary;
+    private String email;
+    private String favoriteBook;
 
     public Person() {
         super();
@@ -48,6 +51,30 @@ public class Person {
         this.car = car;
     }
 
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFavoriteBook() {
+        return favoriteBook;
+    }
+
+    public void setFavoriteBook(String favoriteBook) {
+        this.favoriteBook = favoriteBook;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
@@ -55,6 +82,9 @@ public class Person {
                 ", phone=" + phone +
                 ", car=" + car +
                 ", books=" + books +
+                ", salary=" + salary +
+                ", email='" + email + '\'' +
+                ", favoriteBook='" + favoriteBook + '\'' +
                 '}';
     }
 }
