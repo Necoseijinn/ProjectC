@@ -22,8 +22,8 @@ public class MyBeanPostProcessor implements BeanPostProcessor {
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
 
         /** 只针对类型为Boss的bean **/
-        if(bean instanceof Boss){
-            System.out.println(new Date().toString()+" BeanPostProcessor 在[Boss]初始化之前捕捉到了该动作");
+        if (bean instanceof Boss) {
+            System.out.println(new Date().toString() + " BeanPostProcessor 在[Boss]初始化之前捕捉到了该动作");
         }
 
         return null;
@@ -43,8 +43,8 @@ public class MyBeanPostProcessor implements BeanPostProcessor {
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
 
         /** 只针对类型为Boss的bean **/
-        if(bean instanceof Boss){
-            System.out.println(new Date().toString()+" BeanPostProcessor 在[Boss]初始化之后捕捉到了该动作");
+        if (bean instanceof Boss) {
+            System.out.println(new Date().toString() + " BeanPostProcessor 在[Boss]初始化之后捕捉到了该动作");
         }
 
         return null;

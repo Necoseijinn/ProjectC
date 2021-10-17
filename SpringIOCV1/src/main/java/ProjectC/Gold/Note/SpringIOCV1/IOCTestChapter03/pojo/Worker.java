@@ -8,15 +8,15 @@ public class Worker {
     private int age;
 
     public Worker() {
-        System.out.println(new Date().toString()+" [Worker]的构造函数被调用了");
+        System.out.println(new Date().toString() + " [Worker]的构造函数被调用了");
     }
 
-    public void workerInitMethod(){
-        System.out.println(new Date().toString()+" [Worker]的初始化函数被调用了");
+    public void workerInitMethod() {
+        System.out.println(new Date().toString() + " [Worker]的初始化函数被调用了");
     }
 
-    public void workerDestroyMethod(){
-        System.out.println(new Date().toString()+" [Worker]的销毁函数被调用了");
+    public void workerDestroyMethod() {
+        System.out.println(new Date().toString() + " [Worker]的销毁函数被调用了");
     }
 
     public String getName() {

@@ -9,7 +9,7 @@ public class Dog {
 
     public Dog() {
         super();
-        System.out.println(new Date().toString()+" 【Dog】的无参构造器被调用，【Dog】的实例被创建了。");
+        System.out.println(new Date().toString() + " 【Dog】的无参构造器被调用，【Dog】的实例被创建了。");
     }
 
     public Dog(String kind, String name, int age) {

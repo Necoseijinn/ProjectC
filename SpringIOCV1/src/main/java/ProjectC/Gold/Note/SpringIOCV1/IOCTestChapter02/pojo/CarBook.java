@@ -3,7 +3,7 @@ package ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter02.pojo;
 import java.util.Map;
 
 public class CarBook {
-    private Map<String,String> book;
+    private Map<String, String> book;
 
     public Map<String, String> getBook() {
         return book;

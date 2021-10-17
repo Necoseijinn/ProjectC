@@ -34,7 +34,8 @@ http://www.springframework.org/schema/util  http://www.springframework.org/schem
                 <property name="productList">
                     <list>
                         <!-- 内部bean -->
-                        <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter02.pojo.Product" p:id="2" p:name="NokiaGO"/>
+                        <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter02.pojo.Product" p:id="2"
+                              p:name="NokiaGO"/>
                         <!-- 引用外部bean -->
                         <ref bean="product2"/>
                     </list>
@@ -182,7 +183,8 @@ http://www.springframework.org/schema/util  http://www.springframework.org/schem
         factory-method:指定工厂方法
         constructor-arg：可以为方法传参
     -->
-    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter02.pojo.PhoneStaticFactory" id="product1190" factory-method="getProduct">
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter02.pojo.PhoneStaticFactory" id="product1190"
+          factory-method="getProduct">
         <constructor-arg name="version" value="1190"/>
     </bean>
     <!--
@@ -196,7 +198,8 @@ http://www.springframework.org/schema/util  http://www.springframework.org/schem
         factory-method::指定工厂方法
         constructor-arg：可以为方法传参
     -->
-    <bean id="product2590" class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter02.pojo.Product" factory-bean="phoneInstanceFactory" factory-method="getProduct">
+    <bean id="product2590" class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter02.pojo.Product"
+          factory-bean="phoneInstanceFactory" factory-method="getProduct">
         <!-- 传给实例工厂方法的参数 -->
         <constructor-arg name="version" value="2590"/>
     </bean>

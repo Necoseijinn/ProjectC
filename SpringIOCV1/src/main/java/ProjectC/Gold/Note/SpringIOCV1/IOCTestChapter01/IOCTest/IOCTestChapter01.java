@@ -53,11 +53,13 @@ import java.util.Date;
  */
 public class IOCTestChapter01 {
 
-    /** ApplicationContext（IOC容器的接口）**/
+    /**
+     * ApplicationContext（IOC容器的接口）
+     **/
     private ApplicationContext applicationContext;
 
     @Test
-    public void test01(){
+    public void test01() {
 
         /***
          * ClassPathXmlApplicationContext
@@ -70,7 +72,7 @@ public class IOCTestChapter01 {
          */
         applicationContext = new ClassPathXmlApplicationContext("iocTestChapter01.xml");
 
-        System.out.println(new Date().toString()+" 【IOC容器已经创建完成】往上翻查看已经生成的bean实例，非单例的bean不会在容器创建的时候创建");
+        System.out.println(new Date().toString() + " 【IOC容器已经创建完成】往上翻查看已经生成的bean实例，非单例的bean不会在容器创建的时候创建");
 
         /***
          * 由于Product类的bean设置了 scope="prototype" 是多例的
@@ -79,7 +81,7 @@ public class IOCTestChapter01 {
          *
          * 此处通过传入bean的id来获取bean
          */
-        Product product = (Product)applicationContext.getBean("product");
+        Product product = (Product) applicationContext.getBean("product");
 
         /***
          * 由于Category类的bean对象是单例的
@@ -87,21 +89,21 @@ public class IOCTestChapter01 {
          *
          * 此处通过传入要获取bean的类来获取bean
          */
-        Category category1 =(Category)applicationContext.getBean(Category.class);
-        Category category2 =(Category)applicationContext.getBean(Category.class);
-        System.out.println(new Date().toString()+" 【Category】的bean由于是单例的，每次获取都是同样的对象。category1=category2 ? : "+(category1==category2));
+        Category category1 = (Category) applicationContext.getBean(Category.class);
+        Category category2 = (Category) applicationContext.getBean(Category.class);
+        System.out.println(new Date().toString() + " 【Category】的bean由于是单例的，每次获取都是同样的对象。category1=category2 ? : " + (category1 == category2));
 
-        System.out.println(new Date()+" 以下是product实例的信息，由于只配置了基本数据类型的属性，复杂类型的属性没有配置所以就没有值。");
+        System.out.println(new Date() + " 以下是product实例的信息，由于只配置了基本数据类型的属性，复杂类型的属性没有配置所以就没有值。");
         System.out.println(product);
 
     }
 
     @Test
-    public void test02(){
+    public void test02() {
 
         applicationContext = new ClassPathXmlApplicationContext("iocTestChapter01.xml");
 
-        System.out.println(new Date().toString()+" 【IOC容器已经创建完成】往上翻查看已经生成的bean实例，非单例的bean不会在容器创建的时候创建");
+        System.out.println(new Date().toString() + " 【IOC容器已经创建完成】往上翻查看已经生成的bean实例，非单例的bean不会在容器创建的时候创建");
 
         /***
          * 获取容器中不存在的bean实例会报错
@@ -115,11 +117,11 @@ public class IOCTestChapter01 {
     }
 
     @Test
-    public void test03(){
+    public void test03() {
 
         applicationContext = new ClassPathXmlApplicationContext("iocTestChapter01.xml");
 
-        System.out.println(new Date().toString()+" 【IOC容器已经创建完成】往上翻查看已经生成的bean实例，非单例的bean不会在容器创建的时候创建");
+        System.out.println(new Date().toString() + " 【IOC容器已经创建完成】往上翻查看已经生成的bean实例，非单例的bean不会在容器创建的时候创建");
 
         /***
          * 由于Cat类的bean设置了 scope="prototype" 多例模式
@@ -137,12 +139,12 @@ public class IOCTestChapter01 {
     }
 
     @Test
-    public void test04(){
-        applicationContext=new ClassPathXmlApplicationContext("iocTestChapter01.xml");
-        System.out.println(new Date().toString()+" 【IOC容器已经创建完成】往上翻查看已经生成的bean实例，非单例的bean不会在容器创建的时候创建");
+    public void test04() {
+        applicationContext = new ClassPathXmlApplicationContext("iocTestChapter01.xml");
+        System.out.println(new Date().toString() + " 【IOC容器已经创建完成】往上翻查看已经生成的bean实例，非单例的bean不会在容器创建的时候创建");
         Bird bird1 = (Bird) applicationContext.getBean("bird1");
         Bird bird2 = (Bird) applicationContext.getBean("bird2");
-        System.out.println("两个类相同id不同的bean，通过id获取这两个bean，查看是否是同一个实例。bird1=bird2 ? : "+(bird1==bird2));
+        System.out.println("两个类相同id不同的bean，通过id获取这两个bean，查看是否是同一个实例。bird1=bird2 ? : " + (bird1 == bird2));
         System.out.println("下面尝试使用Bird类去获取bean，会报错");
         try {
             Bird bird3 = applicationContext.getBean(Bird.class);
@@ -152,10 +154,10 @@ public class IOCTestChapter01 {
     }
 
     @Test
-    public void test05(){
+    public void test05() {
 
-        applicationContext=new ClassPathXmlApplicationContext("iocTestChapter01.xml");
-        System.out.println(new Date().toString()+" 【IOC容器已经创建完成】往上翻查看已经生成的bean实例，非单例的bean不会在容器创建的时候创建");
+        applicationContext = new ClassPathXmlApplicationContext("iocTestChapter01.xml");
+        System.out.println(new Date().toString() + " 【IOC容器已经创建完成】往上翻查看已经生成的bean实例，非单例的bean不会在容器创建的时候创建");
         System.out.println("下面尝试获取通过有参构造器创建的bean对象Dog：");
         Dog dog = applicationContext.getBean(Dog.class);
         System.out.println(dog);

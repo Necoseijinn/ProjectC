@@ -8,7 +8,7 @@ public class Cooker {
 
     public Cooker() {
         super();
-        System.out.println(new Date().toString()+" 【Cooker】的无参构造器被调用，【Cooker】的实例被创建了。*优先于Dinner bean 的创建*");
+        System.out.println(new Date().toString() + " 【Cooker】的无参构造器被调用，【Cooker】的实例被创建了。*优先于Dinner bean 的创建*");
     }
 
     public String getName() {

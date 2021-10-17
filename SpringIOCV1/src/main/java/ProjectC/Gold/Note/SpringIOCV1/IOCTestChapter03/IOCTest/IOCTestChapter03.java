@@ -85,7 +85,7 @@ public class IOCTestChapter03 {
     private ConfigurableApplicationContext applicationContext;
 
     @Test
-    public void test01(){
+    public void test01() {
 
         /***
          * 此处由于Boss是单例bean所以自始至终Boss的构造函数初始化函数和销毁函数只会被调用一次。
@@ -95,18 +95,18 @@ public class IOCTestChapter03 {
 
         /** 容器启动 **/
         applicationContext = new ClassPathXmlApplicationContext("iocTestChapter03.xml");
-        System.out.println(new Date().toString()+" 容器初始化完成");
+        System.out.println(new Date().toString() + " 容器初始化完成");
         Boss boss = applicationContext.getBean(Boss.class);
         Worker worker1 = applicationContext.getBean(Worker.class);
         Worker worker2 = applicationContext.getBean(Worker.class);
         /** 容器关闭 **/
         applicationContext.close();
-        System.out.println(new Date().toString()+" 容器关闭了");
+        System.out.println(new Date().toString() + " 容器关闭了");
 
     }
 
     @Test
-    public void test02(){
+    public void test02() {
         applicationContext = new ClassPathXmlApplicationContext("iocTestChapter03.xml");
     }
 
@@ -114,7 +114,7 @@ public class IOCTestChapter03 {
     public void test03() throws SQLException {
 
         applicationContext = new ClassPathXmlApplicationContext("iocTestChapter03.xml");
-        System.out.println(new Date().toString()+" 容器初始化完成");
+        System.out.println(new Date().toString() + " 容器初始化完成");
 
         DataSource dataSource1 = (DataSource) applicationContext.getBean("dataSource1");
         System.out.println(dataSource1.getConnection());
@@ -131,24 +131,24 @@ public class IOCTestChapter03 {
     }
 
     @Test
-    public void test04(){
+    public void test04() {
 
         applicationContext = new ClassPathXmlApplicationContext("iocTestChapter03.xml");
-        System.out.println(new Date().toString()+" 容器初始化完成");
+        System.out.println(new Date().toString() + " 容器初始化完成");
         Person person01 = (Person) applicationContext.getBean("person01");
-        System.out.println(new Date().toString()+" Person01 : "+person01);
+        System.out.println(new Date().toString() + " Person01 : " + person01);
         Person person02 = (Person) applicationContext.getBean("person02");
-        System.out.println(new Date().toString()+" Person02 : "+person02);
+        System.out.println(new Date().toString() + " Person02 : " + person02);
         Person person03 = (Person) applicationContext.getBean("person03");
-        System.out.println(new Date().toString()+" Person03 : "+person03);
+        System.out.println(new Date().toString() + " Person03 : " + person03);
     }
 
     @Test
-    public void test05(){
-        applicationContext=new ClassPathXmlApplicationContext("iocTestChapter03.xml");
-        System.out.println(new Date().toString()+" 容器初始化完成");
-        Person person04 = (Person)applicationContext.getBean("person04");
-        System.out.println(new Date().toString()+" 使用SpEL装配的Person04 : "+person04);
+    public void test05() {
+        applicationContext = new ClassPathXmlApplicationContext("iocTestChapter03.xml");
+        System.out.println(new Date().toString() + " 容器初始化完成");
+        Person person04 = (Person) applicationContext.getBean("person04");
+        System.out.println(new Date().toString() + " 使用SpEL装配的Person04 : " + person04);
     }
 
 }

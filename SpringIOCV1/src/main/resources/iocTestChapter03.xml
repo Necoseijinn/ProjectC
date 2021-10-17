@@ -45,7 +45,8 @@
         1，不使用外部属性文件的情况
     -->
     <bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource1">
-        <property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/plain?characterEncoding=UTF-8&amp;serverTimezone=UTC"/>
+        <property name="jdbcUrl"
+                  value="jdbc:mysql://127.0.0.1:3306/plain?characterEncoding=UTF-8&amp;serverTimezone=UTC"/>
         <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
         <property name="user" value="root"/>
         <property name="password" value="admin"/>

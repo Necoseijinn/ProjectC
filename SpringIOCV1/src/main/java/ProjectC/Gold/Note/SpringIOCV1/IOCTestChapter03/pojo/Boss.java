@@ -8,15 +8,15 @@ public class Boss {
     private int age;
 
     public Boss() {
-        System.out.println(new Date().toString()+" [Boss]的构造函数被调用了");
+        System.out.println(new Date().toString() + " [Boss]的构造函数被调用了");
     }
 
-    public void bossInitMethod(){
-        System.out.println(new Date().toString()+" [Boss]的初始化函数被调用了");
+    public void bossInitMethod() {
+        System.out.println(new Date().toString() + " [Boss]的初始化函数被调用了");
     }
 
-    public void bossDestroyMethod(){
-        System.out.println(new Date().toString()+" [Boss]的销毁函数被调用了");
+    public void bossDestroyMethod() {
+        System.out.println(new Date().toString() + " [Boss]的销毁函数被调用了");
     }
 
     public String getName() {

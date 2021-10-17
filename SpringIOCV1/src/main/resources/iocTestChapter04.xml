@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+">
+
+    <!--
+        test01 start
+    -->
+    <!--
+        通过注解分别将Dao，Service，Controller类添加到IOC容器中
+        Spring四大注解：
+            @Controller
+                控制器层
+            @Service
+                业务逻辑层
+            @Repository
+                持久化层或者说数据库层
+            @Component
+                以上组件之外的类
+        只要在类上标上以上任意一个注解，Spring都会在扫描包之后把对应类加入IOC容器（利用反射）。
+        上面四个注解并不是要严格按照类型去使用，只不过为了规范和好的阅读性才这么设计的。
+
+        使用注解将组件添加到Spring的步骤
+        1，给想要添加到IOC容器的类上添加以上任意一个注解（建议按照类型）
+        2，配置Spring自动扫描包，让Spring感知这些被注解的类。
+    -->
+    <!--
+        使用<context:component-scan>来扫描包
+        扫描后加进IOC容器的组件的id默认就是其类名首字母小写（配置文件添加组件不写id默认没有）
+        默认是单例模式（跟配置文件添加组件是一样的）
+    -->
+    <!--
+    以下为基本写法，目前扫描依靠与下面test03版本的包扫描配置。
+    <context:component-scan base-package="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter04"/>
+    -->
+    <!--
+        test01 end
+    -->
+
+    <!--
+        test02 start
+    -->
+    <!--
+        通过四大注解的value属性来指定组件的id
+        通过添加一个Scope注解并指定其value属性来指定单例或者多例模式
+        具体参考以下类：
+            ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter04.Service.ProductService
+    -->
+    <!--
+        test02 end
+    -->
+
+    <!--
+        test03 start
+    -->
+    <!--
+        <context:include-filter>
+            只扫描指定组件
+            要想实现只扫描特定组件必须关闭父标签的默认过滤器
+            也就是use-default-filters属性，指定为false即可。
+            因为默认情况下就是扫描父标签指定包下所有内容。
+            如果use-default-filters为true即便写了只扫描指定组件的配置，其他组件也会被扫描到。
+        <context:exclude-filter>
+            扫描的时候排除指定组件
+    -->
+    <context:component-scan base-package="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter04" use-default-filters="true">
+        <!--
+            以下两个标签的顺序不能乱
+            type是指要采用哪种模式去执行排除或者针对性扫描
+                type的值：
+                    1，assignable
+                        明确要排除的类（expression后写上要包含或者排除的类的全类名）
+                    2，annotation
+                        明确那种类型的注解要被排除或者包含
+                        （expression后写上要包含或者排除的注解的全类名）
+                        注意不可以写@Component会把所有注解都排外
+                    3，aspectj
+                        （aspectj表达式具体参考AOP事务配置的章节）
+                        （expression后写aspectj表达式）
+                    4，custom
+                        需要手写一个TypeFilter的实现类
+                        （expression后写上自己写的TypeFileter实现类的全类名）
+                    5，regex
+                        正则表达式
+                        （expression后写正则表达式）
+                        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Component"/>
+        -->
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+        <context:exclude-filter type="assignable"
+                                expression="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter04.TestExclude.BookExclude"/>
+    </context:component-scan>
+    <!--
+        test03 end
+    -->
+
+</beans>
