@@ -31,10 +31,13 @@
         使用<context:component-scan>来扫描包
         扫描后加进IOC容器的组件的id默认就是其类名首字母小写（配置文件添加组件不写id默认没有）
         默认是单例模式（跟配置文件添加组件是一样的）
+        base-package属性用于指定扫描包
+        resource-pattern用于指定扫描类需要遵守的规则
     -->
     <!--
     以下为基本写法，目前扫描依靠与下面test03版本的包扫描配置。
-    <context:component-scan base-package="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter04"/>
+    <context:component-scan base-package="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter04"
+                            resource-pattern="*.class"/>
     -->
     <!--
         test01 end
@@ -94,6 +97,24 @@
     </context:component-scan>
     <!--
         test03 end
+    -->
+
+    <!--
+        test06 start
+    -->
+    <!--
+        当AutoWired注解标注在数组、List、Map上时。
+            1，数组
+                Spring会把所有匹配的bean进行自动装配（根据数组类型）
+            2，List
+                Spring会读取该集合的类型信息，然后自动装配所有与之兼容的bean。
+            3，Map
+                若该Map的键值为String，那么Spring将自动装配与值类型兼容的bean作为值，并以bean的id值作为键。
+        详情参考以下的类：
+
+    -->
+    <!--
+        test06 start
     -->
 
 </beans>
