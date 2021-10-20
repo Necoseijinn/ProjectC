@@ -12,6 +12,13 @@
     <!--
         在配置bean的同时可以指定配置的bean的Class中的某一方法来作为初始化或者销毁方法
         注意不能指定带有参数的方法
+        除了以下配置之外还可以让bean类实现以下接口来达到设定初始化和销毁方法。
+            接口 InitializingBean ===> 方法 afterPropertiesSet
+                实现该接口来达到配置Bean初始化方法的效果
+            接口 DisposableBean ===> 方法 destroy
+                实现该接口来达到配置Bean销毁方法的效果
+            详情参考以下的类
+                ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter03.pojo.Client
     -->
     <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter03.pojo.Boss"
           init-method="bossInitMethod"
@@ -20,6 +27,9 @@
           init-method="workerInitMethod"
           destroy-method="workerDestroyMethod"
           scope="prototype"/>
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter03.pojo.Client">
+        <property name="name" value="Client01"/>
+    </bean>
     <!--
         test01 end
     -->
@@ -146,6 +156,13 @@
                 3，引用其他bean的某个属性值
                 4，调用非静态方法以及调用静态方法
                 5，使用运算符
+                    ①算术运算符：+、-、*、/、%、^
+                    ②字符串连接：+
+                    ③比较运算符：<、>、==、<=、>=、lt、gt、eq、le、ge
+                    ④逻辑运算符：and, or, not, |
+                    ⑤三目运算符：判断条件?判断结果为true时的取值:判断结果为false时的取值
+                    ⑥正则表达式：matches
+
     -->
     <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter03.pojo.Person" id="person04">
         <!-- 引用其他bean的某个属性值 -->

@@ -100,7 +100,7 @@
     -->
 
     <!--
-        test06 start
+        test04 start
     -->
     <!--
         当AutoWired注解标注在数组、List、Map上时。
@@ -111,10 +111,19 @@
             3，Map
                 若该Map的键值为String，那么Spring将自动装配与值类型兼容的bean作为值，并以bean的id值作为键。
         详情参考以下的类：
-
+            ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter04.Pojo.Category
     -->
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter04.Pojo.Product" id="product01">
+        <property name="name" value="Product01"/>
+    </bean>
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter04.Pojo.Product" id="product02">
+        <property name="name" value="Product01"/>
+    </bean>
+    <bean class="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter04.Pojo.Product" id="product03">
+        <property name="name" value="Product01"/>
+    </bean>
     <!--
-        test06 start
+        test04 end
     -->
 
 </beans>

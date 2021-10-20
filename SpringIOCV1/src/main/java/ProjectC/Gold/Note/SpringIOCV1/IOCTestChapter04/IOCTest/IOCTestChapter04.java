@@ -54,6 +54,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  *
  *          AutoWired标注的属性默认是必须要在IOC容器中找得到匹配组件的，如果找不到就抛异常，
  *          我们可以通过指定AutoWired的required属性为false来实现找不到匹配组件也不会抛异常。
+ *          详情参考
+ *              ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter04.Controller.ProductServlet
  *
  *          此外AutoWired以及Qualifier还可以标注在方法以及方法的参数上
  *          具体参照以下的类
@@ -67,11 +69,22 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  *          也就是说相比AutoWired，Resource兼容性更强，只不过目前IOC容器也就Spring一家独大，所以目前AutoWired就行。
  *          还有一种叫Inject注解是EJB框架使用，不考虑。
  *
+ *          当AutoWired注解标注在数组、List、Map上时。
+ *             1，数组
+ *                 Spring会把所有匹配的bean进行自动装配（根据数组类型）
+ *             2，List
+ *                 Spring会读取该集合的类型信息，然后自动装配所有与之兼容的bean。
+ *             3，Map
+ *                 若该Map的键值为String，那么Spring将自动装配与值类型兼容的bean作为值，并以bean的id值作为键。
+ *          详情参考以下的类：
+ *              ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter04.Pojo.Category
+ *
  * test05
  * 需求：
  *      利用Spring的单元测试
  *      作用：可以在单元测试启动的时候顺便启动IOC容器
  *      详情参考以下类：
+ *
  *
  *
  */

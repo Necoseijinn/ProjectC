@@ -1,6 +1,7 @@
 package ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter04.Controller;
 
 import ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter04.Dao.ProductDao;
+import ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter04.Pojo.Category;
 import ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter04.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,6 +12,9 @@ public class ProductControllerForTest04 {
 
     private ProductService productService;
     private ProductDao productDao;
+
+    @Autowired
+    private Category category;
 
     /***
      *
@@ -32,5 +36,9 @@ public class ProductControllerForTest04 {
     public void get() {
         productService.get();
         System.out.println(this.productDao);
+        System.out.println("===========================================");
+        System.out.println("自动装配的products（数组） : " + category.getProducts());
+        System.out.println("自动装配的productList（List集合） : " + category.getProductList());
+        System.out.println("自动装配的productMap（Map集合） : " + category.getProductMap());
     }
 }

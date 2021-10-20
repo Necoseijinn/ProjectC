@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+">
+
+    <!--
+        test01 start
+    -->
+    <!--
+        关于泛型依赖注入
+        虽然很复杂但简单举个例子
+
+                ===>类B<Prodcut>(继承类A<T>)
+        类A<T>===
+                ===>类C<Category>(继承类A<T>)
+
+        类A有一个标注了@Autowired的属性类Z<T>
+        （由于继承的关系类B跟C也拥有了该属性）
+
+                ===>类X<Prodcut>(继承类Z<T>)
+        类Z<T>===
+                ===>类Y<Category>(继承类Z<T>)
+
+        类B、C、X、Y均是SpringIOC的组件
+
+        由于在类A中属性Z的泛型跟类A声明的泛型都是T，意味着这两个泛型类的泛型类型是一样的。
+        所以当B<Product>去调用继承来的属性类Z<T>的时候，Spring会自动匹配跟B<Product>泛型类的泛型类型一样的属于类Z的组件。
+        这时候就找到了类X<Product>
+
+        这就是泛型依赖注入
+
+        当利用类型去获取组件的时候，Spring是利用instanceof来匹配组件的。
+        所以可以用父类或者接口来获取子类组件。
+
+    -->
+    <!--
+        设置包扫描把含特定注解的类添加到IOC容器中
+    -->
+    <context:component-scan base-package="ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter05"/>
+    <!--
+        test01 end
+    -->
+
+    <!--
+        test02 start
+    -->
+    <!--
+        利用<import>来导入别的Springxml配置文件
+        可以实现多个容器组成一个容器
+        此处测试获取iocTestChapter01.xml的ID为product的Bean
+        详情看test02
+
+        此设置可用于联合SpringMVC的xml文件跟Spring的xml文件
+
+        还可以通过设置前缀来设定从哪里获取资源文件
+            1，classpath:
+                从类路径下加载资源（classpath:和classpath:/是等价的）
+            2，file:
+                从文件系统目录中加载资源（可采用绝对或者相对路径）
+            3，http://
+                从WEB服务器中加载资源
+            4，ftp://
+                从FTP服务器中加载资源
+    -->
+    <import resource="classpath:FakeSpringMVC-servlet.xml"/>
+    <!--
+        test02 end
+    -->
+</beans>

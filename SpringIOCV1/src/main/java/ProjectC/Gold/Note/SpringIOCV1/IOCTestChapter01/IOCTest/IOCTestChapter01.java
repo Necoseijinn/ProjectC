@@ -81,7 +81,7 @@ public class IOCTestChapter01 {
          *
          * 此处通过传入bean的id来获取bean
          */
-        Product product = (Product) applicationContext.getBean("product");
+        Product product = (Product) applicationContext.getBean("Product");
 
         /***
          * 由于Category类的bean对象是单例的

@@ -7,6 +7,21 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+/***
+ *
+ * Category标注了Autowired的三个属性
+ *      1，products
+ *          数组类型
+ *          Spring会去IOC容器中寻找符合该数组所属类型的组件并封装成数组赋值给该属性
+ *      2，productList
+ *          List集合
+ *          Spring会去IOC容器中寻找符合该List集合泛型的组件并封装成List赋值给该属性
+ *      3，productMap
+ *          Map集合
+ *          Spring会去IOC容器中寻找符合该Map集合value对应泛型的组件
+ *          然后把该组件的bean的id作为key一起封装成Map赋值给该属性
+ *
+ */
 @Component
 public class Category {
     private int id;
@@ -16,7 +31,7 @@ public class Category {
     @Autowired
     private List<Product> productList;
     @Autowired
-    private Map<String,Product> productMap;
+    private Map<String, Product> productMap;
 
     public int getId() {
         return id;
@@ -69,9 +84,4 @@ public class Category {
                 '}';
     }
 
-    public void showProducts(){
-        System.out.println("自动装配的Product数组 : "+products);
-        System.out.println("自动装配的ProductList : "+productList);
-        System.out.println("自动装配的ProductMap : "+productMap);
-    }
 }

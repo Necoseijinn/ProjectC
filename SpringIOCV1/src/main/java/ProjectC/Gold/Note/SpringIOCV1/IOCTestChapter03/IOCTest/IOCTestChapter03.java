@@ -1,9 +1,6 @@
 package ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter03.IOCTest;
 
-import ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter03.pojo.Boss;
-import ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter03.pojo.Person;
-import ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter03.pojo.UserName;
-import ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter03.pojo.Worker;
+import ProjectC.Gold.Note.SpringIOCV1.IOCTestChapter03.pojo.*;
 import com.sun.corba.se.spi.orbutil.threadpool.Work;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -99,6 +96,7 @@ public class IOCTestChapter03 {
         Boss boss = applicationContext.getBean(Boss.class);
         Worker worker1 = applicationContext.getBean(Worker.class);
         Worker worker2 = applicationContext.getBean(Worker.class);
+        Client client = applicationContext.getBean(Client.class);
         /** 容器关闭 **/
         applicationContext.close();
         System.out.println(new Date().toString() + " 容器关闭了");
